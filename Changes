@@ -17,3 +17,12 @@ Revision history for Perl extension Weather::WMO.
 1.1.2  Sat Jul 31 14:47:55 1999
         - parentheses are now optional for addendums
         - accept "COR" (for correction) as valid addendum
+
+1.1.3  Tue Aug 10 05:52:47 1999
+        - changes to the documentation
+        - fixed bug: accepts as valid products where "ii" is 1-digit
+          (ie, "FPHW1")
+        - fixed bug with cmp method
+        - added BBB method
+        - other minor code changes
+
