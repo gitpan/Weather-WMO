@@ -1,6 +1,16 @@
 Weather::WMO is a module for parsing WMO abbreviated header lines
-in World Meterological Organization-formatted weather products.
+in World Meterological Organization-formatted weather products (such
+as might come from the National Weather Service).
 
-For more information, see http://www.nws.noaa.gov/oso/head.shtml
+Aside from simple validation and parsing of header the lines (for
+example, "FPUS61 KNYC 103055") this module doesn't do much else, but it
+is used for the modules Weather::Product and Weather::Product::NWS
+
+Required Modules:
+	Carp
+
+For more information about what WMO heading lines are, see
+http://www.nws.noaa.gov/oso/head.shtml
+
 
 

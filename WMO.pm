@@ -11,7 +11,20 @@ Weather::WMO - routines for parsing WMO abbreviated header lines
 Weather::WMO is a module for parsing WMO abbreviated header lines
 in World Meterological Organization-formatted weather products.
 
-For more information, see http://www.nws.noaa.gov/oso/head.shtml
+Aside from simple validation and parsing of header the lines (for
+example, "FPUS61 KNYC 103055") this module doesn't do much else, but it
+is used for the modules Weather::Product and Weather::Product::NWS
+
+For more information about what WMO heading lines are, see
+http://www.nws.noaa.gov/oso/head.shtml
+
+=head1 CAVEAT
+
+I am not a meteorologist nor am I associated with any weather service.
+This module grew out of a hack which would fetch weather reports every
+morning and send them to my pager. So I said to myself "Why not do this
+the I<right> way..." and spent a bit of time surfing around the web
+looking for documentation about this stuff....
 
 =head1 EXAMPLE
 
@@ -36,6 +49,10 @@ For more information, see http://www.nws.noaa.gov/oso/head.shtml
     $WMO = new Weather::WMO;
     $WMO->WMO="FPUS51 KNYC 041200 (PAA)";
 
+=head1 SEE ALSO
+
+Weather::Product and Weather::Product::NWS, which make use of this module.
+
 =head1 AUTHOR
 
 Robert Rothenberg <wlkngowl@unix.asb.com>
@@ -48,7 +65,7 @@ use constant PRODUCT => 'PRODUCT';
 @EXPORT = qw(PRODUCT);
 
 use vars qw($VERSION $AUTOLOAD);
-$VERSION = "1.1.0";
+$VERSION = "1.1.2";
 
 use Carp;
 
@@ -81,7 +98,7 @@ sub import {
         if (@_==1) {
             $WMO = shift;
             ($product, $station, $time, $addendum) = split(/ /, $WMO);
-            $addendum =~ s/\(((AA|CC|RR|P[A-X])[A-X])\)/$1/;
+            $addendum =~ s/\(?((AA|CC|CO|RR|P[A-X])[A-X])\)?/$1/;
         } else {
             ($product, $station, $time, $addendum)=@_;
             $WMO = "$product $station $time";
@@ -119,7 +136,7 @@ sub import {
 
 sub valid {
     my $arg = shift;
-    if ($arg =~ m/^[A-Z]{4}\d{2} [A-Z]{3,4} \d{4,6}( \((AA|CC|RR|P[A-X])[A-X]\))?$/) {
+    if ($arg =~ m/^[A-Z]{4}\d{2} [A-Z]{3,4} \d{4,6}( \(?((AA|CC|RR|P[A-X])[A-X]|COR)\)?)?$/) {
         return 1;
     } else {
         return 0;
