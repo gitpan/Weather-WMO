@@ -1,0 +1,6 @@
+Weather::WMO is a module for parsing WMO abbreviated header lines
+in World Meterological Organization-formatted weather products.
+
+For more information, see http://www.nws.noaa.gov/oso/head.shtml
+
+

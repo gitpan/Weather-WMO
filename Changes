@@ -1,0 +1,12 @@
+Revision history for Perl extension Weather::WMO.
+
+1.0.5  Sun Jul 25 15:57:43 1999
+        - original version released to public
+
+1.1.0  Wed Jul 28 16:53:58 1999  
+        - renamed module to Weather::PIL to Weather::WMO
+        - added T1,T2,A1,A2,ii etc methods for parsing product code
+        - changes $obj->code to $obj->product
+        - added region method for parsing geographic region
+        - added README to distribution
+        - improved documentation (slightly)
